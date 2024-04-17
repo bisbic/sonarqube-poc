@@ -22,19 +22,19 @@ Password: admin
 - Project key: SonarQubeDemo
 - Main branch name: master
 - Location: Locally
-- Setup .env using the environment variables values returned by the project setup
-- Load environment:
+
+## Set configs on project to be scanned
 ```
-source .env
+cp sonar-project.properties /project/path
 ```
+- Edit sonar-project.properties
 
 ## Run SonarScanner 
 ```
-docker run \
-    --rm \
-    -e SONAR_HOST_URL="${SONAR_HOST_URL}" \
-    -e SONAR_SCANNER_OPTS="-Dsonar.projectKey=${PROJECT_KEY}" \
-    -e SONAR_LOGIN="${SONAR_LOGIN}" \
-    -v "${YOUR_REPO}:/usr/src" \
-    sonarsource/sonar-scanner-cli
+cd /project/path
+./unziped-sonar-scanner/bin/sonar-scanner \
+  -Dsonar.projectKey=<project-key> \
+  -Dsonar.sources=. \
+  -Dsonar.host.url=http://localhost:9001 \
+  -Dsonar.login=<project-login>
 ```
